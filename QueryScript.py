@@ -1,12 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-import smtplib
-from email.mime.text import MIMEText
-from email.utils import formataddr
 import time
 
-from selenium.webdriver.common.by import By
 
 url1 = 'http://ehall.seu.edu.cn/gsapp/sys/wddbsqappseu/*default/index.do?t_s=1652969354823&amp_sec_version_=1&gid_=T1ljeGQwY3J6OEhKSWd3RWZHcjQ5b1JmQ3dvRVMxdHd5aTd3ak9BL1lrQUVJYm5MRGwwUTVJaTFwOHFhcmZ6T21KMVZQc2tzbldOY0ZFWVVzV2tmclE9PQ&EMAP_LANG=zh&THEME=indigo#/xsbdjcsq'
 url = "http://ehall.seu.edu.cn/gsapp/sys/wddbsqappseu/modules/xsbdjcsq/lwssjgcx.do"
@@ -17,6 +13,7 @@ def login(user, pw, browser):
     browser.implicitly_wait(10)
 
     # 填写用户名密码
+
     username = browser.find_element(By.ID, 'username')
     password = browser.find_element(By.ID, 'password')
     username.clear()
@@ -29,13 +26,17 @@ def login(user, pw, browser):
     login_button.submit()
 
 if __name__ == "__main__":
-
     # 账号
     user = ''
     # 密码
     pw = ''
+
+    option = webdriver.ChromeOptions()
+    # 隐藏浏览器
+    option.add_argument('headless')
+
     s = Service("chromedriver.exe")
-    browser = webdriver.Chrome(service=s)
+    browser = webdriver.Chrome(service=s, options=option)
     print("------------------浏览器已启动----------------------")
     login(user, pw, browser)
     browser.implicitly_wait(10)
@@ -53,3 +54,5 @@ if __name__ == "__main__":
         elif ele[0:7] == '"SSDWMC':
             print(ele[10:-1] + ':')
     browser.quit()
+
+    time.sleep(100)
