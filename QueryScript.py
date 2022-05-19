@@ -30,7 +30,8 @@ def login(user, pw, browser):
 
 if __name__ == "__main__":
 
-    user = '220191671'
+    # 账号
+    user = ''
     # 密码
     pw = ''
     s = Service("chromedriver.exe")
