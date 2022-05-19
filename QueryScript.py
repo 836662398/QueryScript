@@ -17,7 +17,6 @@ def login(user, pw, browser):
     browser.implicitly_wait(10)
 
     # 填写用户名密码
-
     username = browser.find_element(By.ID, 'username')
     password = browser.find_element(By.ID, 'password')
     username.clear()
