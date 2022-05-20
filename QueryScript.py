@@ -92,19 +92,26 @@ if __name__ == "__main__":
             SCHOOL.append(ele[10:-1])
     browser.quit()
 
-    for zjid in ZJID:
-        hash_code += zjid
-    for cj in CJ:
-        hash_code += cj
+    for i in range(0, 2):
+        hash_code += SCHOOL[i]
+        hash_code += ':'
+        hash_code += ZJID[i]
+        hash_code += ','
+        hash_code += CJ[i]
+        hash_code += '\n'
+
     print(hash_code)
 
     # 如果信息改变，发送邮件通知用户
-    f = open("hash.txt", 'w+')
-    if hash_code != f.read():
+    f = open("msg.txt", 'r', encoding="utf-8")
+    stri = str(f.read())
+    # print(stri)
+    # print('read over')
+    if hash_code != stri:
         print("Content changed!")
+        f.close()
+        f = open("msg.txt", 'w+', encoding="utf-8")
         mail(hash_code)
         f.write(hash_code)
 
     f.close()
-
-    time.sleep(100)
